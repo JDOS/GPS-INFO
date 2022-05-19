@@ -2,6 +2,7 @@ from exif import Exif
 import os
 import glob
 import tkinter as tk
+from tkinter import ttk
 from tkinter import filedialog
 from tkinter import simpledialog
 
@@ -83,17 +84,31 @@ class MainApplication(tk.Frame):
 		tk.Frame.__init__(self, parent, *args, **kwargs)
 		self.parent = parent
 
+
+		separator = ttk.Separator(self, orient='horizontal')
+		separator.pack(fill='x')
+
 		self.PastaEntrada = PATH + '\\INPUT'
 		self.PastaSaida =  PATH + '\\OUTPUT'
 
-		self.lbentrada = tk.Label(self, text= self.PastaEntrada)
+		self.lbentrada = tk.Label(self, text="Pasta de Entrada:")
 		self.lbentrada.pack(pady=10,padx=10)
+
+		self.entrada = tk.StringVar()
+		self.entrada.set(self.PastaEntrada)
+		self.entryEntrada = ttk.Entry(self, textvariable=self.entrada, state='disabled')
+		self.entryEntrada.pack(pady=10,padx=10, fill='x')
 
 		self.lbsaida = tk.Label(self, text="Pasta de Saida: " + self.PastaSaida )
 		self.lbsaida.pack(pady=10,padx=10)
 
 		self.lbstatus = tk.Label(self, text="STATUS")
 		self.lbstatus.pack(pady=10,padx=10)
+
+		self.textStatus = tk.Text(self, height=12,width=40)
+		self.textStatus.pack()
+
+
 
 		btnFind = tk.Button(self, text="Pasta de Entrada", command=self.getFolderPath)
 		btnFind.pack()
@@ -138,7 +153,9 @@ class MainApplication(tk.Frame):
 		folder_selected = tk.filedialog.askdirectory()
 		if(folder_selected !=''):
 			self.PastaEntrada=folder_selected
-			self.lbentrada["text"] = folder_selected
+			#self.lbentrada["text"] = folder_selected
+			self.entrada.set(folder_selected)
+			#self.entryEntrada.insert(0, folder_selected)
 
  
 	def start(self):
@@ -224,5 +241,7 @@ class MainApplication(tk.Frame):
 
 if __name__ == "__main__":
     root = tk.Tk()
+    root.iconbitmap("gps.ico")
+    root.title("GPS-INFO")
     MainApplication(root).pack(side="top", fill="both", expand=True)
     root.mainloop()
