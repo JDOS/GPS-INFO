@@ -23,7 +23,9 @@ class Exif:
 
 
 	def get_dict(self):
-		process = subprocess.Popen([EXE, self.input_file], stdout = subprocess.PIPE, stderr=subprocess.STDOUT)
+		si = subprocess.STARTUPINFO()
+		si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+		process = subprocess.Popen([EXE, self.input_file], stdout = subprocess.PIPE, stderr=subprocess.STDOUT,startupinfo=si)
 
 		metadata = []
 		for output in process.stdout:
@@ -255,7 +257,7 @@ class Exif:
 			log = self.dms2dec(self.gps[4],self.gps[5],self.gps[6], self.gps[7])
 			return lat, log
 		else:
-			return ''
+			return 0,0
 
 	def get_gps_utm(self):
 		if(self.gps!=''):
@@ -267,6 +269,7 @@ class Exif:
 			return gps_utm_info
 		else:
 			return ''
+
 
 	def get_utm(self):
 		if(self.gps!=''):
