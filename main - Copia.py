@@ -123,7 +123,7 @@ class MainApplication(tk.Frame):
 		self.check2.pack()	
 
 		self.no_edit = tk.IntVar()
-		self.check3 = tk.Checkbutton(self, text='Sem edição',variable=self.no_edit, onvalue=1, offvalue=0)
+		self.check3 = tk.Checkbutton(self, text='No edit',variable=self.no_edit, onvalue=1, offvalue=0)
 		self.check3.pack()	
 
 		self.no_gps = tk.IntVar()
@@ -140,7 +140,7 @@ class MainApplication(tk.Frame):
 		start = tk.Button(self, text="Criar Imagens",command=self.start)
 		start.pack()
 
-		csv_output = tk.Button(self, text="CSV/Google Maps (Only HEIC)",command=self.csv_output)
+		csv_output = tk.Button(self, text="Escrever CSV",command=self.csv_output)
 		csv_output.pack()
 		
 
@@ -177,6 +177,8 @@ class MainApplication(tk.Frame):
 
 			for filename in glob.glob( self.PastaEntrada + '/*' + typ): 
 				foto = Exif(filename)
+				foto.data="27/04/2022"
+				foto.hora="16:32:10"
 				output_file = self.PastaSaida + '/' + os.path.basename(filename)
 
 				self.showImage(filename)
@@ -189,6 +191,7 @@ class MainApplication(tk.Frame):
 					if(foto.get_gps_utm()=='' or self.edit_set.get()==1):
 						gps_utm_info = foto.get_gps_utm()
 						gps_utm_info = tk.simpledialog.askstring("GPS INFO","Insira a geolocalização:", parent=self, initialvalue=gps_utm_info)
+
 						if(gps_utm_info=='' or gps_utm_info==None):
 							gps_utm_info ='UTM: Not Found'
 							output_file = output_file +'not-found'+ '.'+ foto.extension

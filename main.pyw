@@ -113,6 +113,7 @@ class MainApplication(tk.Frame):
 		btnFind = tk.Button(self, text="Pasta de Entrada", command=self.getFolderPath)
 		btnFind.pack()
 		
+
 		self.edit_set = tk.IntVar()
 		self.check1 = tk.Checkbutton(self, text='Edit GPS INFO',variable=self.edit_set, onvalue=1, offvalue=0)
 		self.check1.pack()
@@ -122,7 +123,7 @@ class MainApplication(tk.Frame):
 		self.check2.pack()	
 
 		self.no_edit = tk.IntVar()
-		self.check3 = tk.Checkbutton(self, text='No edit',variable=self.no_edit, onvalue=1, offvalue=0)
+		self.check3 = tk.Checkbutton(self, text='Sem edição',variable=self.no_edit, onvalue=1, offvalue=0)
 		self.check3.pack()	
 
 		self.no_gps = tk.IntVar()
@@ -139,7 +140,7 @@ class MainApplication(tk.Frame):
 		start = tk.Button(self, text="Criar Imagens",command=self.start)
 		start.pack()
 
-		csv_output = tk.Button(self, text="Escrever CSV",command=self.csv_output)
+		csv_output = tk.Button(self, text="CSV/Google Maps (Only HEIC)",command=self.csv_output)
 		csv_output.pack()
 		
 
