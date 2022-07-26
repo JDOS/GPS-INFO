@@ -1,5 +1,6 @@
 GPS INFO
 
+Edit Images and set informations on pictures, using EXIF.exe
 ".JPEG, .JPG e .PNG"
 
 INSTALL
